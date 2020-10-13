@@ -9,11 +9,11 @@
   "random_delay": false,
   "check_interval": 10,
 
-  "auto_leave_after_min": -1,
+  "auto_leave_after_min": 90,
   "leave_if_last": false,
 
   "headless" : false,
-  "mute_audio": false,
+  "mute_audio": true,
   "chrome_type": "google-chrome",
 
   "blacklist": [

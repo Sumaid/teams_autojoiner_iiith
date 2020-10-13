@@ -116,7 +116,7 @@ class Meeting:
         return f"\t{self.title} {self.time_started}" + (" [Calendar]" if self.calendar_meeting else " [Channel]") + (" [BLACKLISTED]" if self.calendar_blacklisted else "")
 
     def check_blacklist_calendar_meeting(self, title):
-        regex = config['blacklist_calendar_re']
+        regex = config.get('blacklist_calendar_re',[])
         # empty regex matches everything but we don't want it
         if len(regex) == 0:
             return False
@@ -337,6 +337,8 @@ def get_calendar_meetings():
         meetings.append(Meeting(meeting_id, start_time, meeting_name, calendar_meeting=True))
 
 def decide_meeting():
+    global meetings
+
     newest_meetings = []
 
     meetings = [x for x in meetings if not x.calendar_blacklisted]
@@ -487,25 +489,42 @@ def main():
         if login_email is not None:
             login_email.send_keys(config['email'])
 
+        go_to_org = wait_until_found("input[type='submit']", 5)
+        if go_to_org is not None:
+            go_to_org.click()
+        else:
+            print("Error in submitting to go to org")
+
         # find the element again to avoid StaleElementReferenceException
-        login_email = wait_until_found("input[type='email']", 5)
+        login_email = wait_until_found("input[id='username']", 5)
         if login_email is not None:
-            login_email.send_keys(Keys.ENTER)
+            login_email.send_keys(config['email'][:-18])
+
+        # # find the element again to avoid StaleElementReferenceException
+        # login_email = wait_until_found("input[type='username']", 5)
+        # if login_email is not None:
+        #     login_email.send_keys(Keys.ENTER)
 
         login_pwd = wait_until_found("input[type='password']", 10)
         if login_pwd is not None:
             login_pwd.send_keys(config['password'])
 
         # find the element again to avoid StaleElementReferenceException
-        login_pwd = wait_until_found("input[type='password']", 5)
-        if login_pwd is not None:
-            login_pwd.send_keys(Keys.ENTER)
+        # login_pwd = wait_until_found("input[type='password']", 5)
+        # if login_pwd is not None:
+        #     login_pwd.send_keys(Keys.ENTER)
 
-        keep_logged_in = wait_until_found("input[id='idBtn_Back']", 5)
+        keep_logged_in = wait_until_found("input[type='submit']", 5)
         if keep_logged_in is not None:
             keep_logged_in.click()
         else:
-            print("Login Unsuccessful, recheck entries in config.json")
+            print("Error in submitting on IIIT website")
+
+        keep_logged_in = wait_until_found("input[type='submit']", 5)
+        if keep_logged_in is not None:
+            keep_logged_in.click()
+        else:
+            print("Error in submitting on stay signed in option")
 
         use_web_instead = wait_until_found(".use-app-lnk", 5, print_error=False)
         if use_web_instead is not None:

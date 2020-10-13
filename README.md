@@ -1,4 +1,4 @@
-# Teams-Auto-Joiner
+# Teams-Auto-Joiner for IIITH
 [![GitHub stars](https://img.shields.io/github/stars/TobiasPankner/Teams-Auto-Joiner.svg?style=social&label=Star)](https://GitHub.com/TobiasPankner/Teams-Auto-Joiner/stargazers/)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3TU2XDBK2JFU4&source=url)
 
@@ -86,3 +86,8 @@ If you want to blacklist all the channels in a team, leave the square brackets e
  4. Run [auto_joiner.py](auto_joiner.py): `python auto_joiner.py`
  5. After starting, teams might be in Grid view, if this is the case change the view to list [(How to do)](https://support.microsoft.com/en-us/office/view-and-organize-your-teams-b9dd0d8c-243a-43a4-9501-ec8017fec32e)
 <img src="https://i.imgur.com/GODoJYf.png?2" width="300" height="245" />
+
+## Original Repository
+
+
+https://github.com/TobiasPankner/Teams-Auto-Joiner
